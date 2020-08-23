@@ -10,18 +10,21 @@ with open (file_path, 'r') as csvfile:
 
     # contents = file.read()
     header = next(csvreader)
-    first_row= next(csvreader)
+    # first_row= next(csvreader)
+
+    
+    total_months = 0
+    total_net = 0
+    previousnet = 0
+    greatest_increase = ["", 0]
+    greatest_decrease = ["", 99999999999]
 
     for row in csvreader:
 
-
         Net_Change = []
-        total_net = 0
         change_in_month = []
 
-        total_months = 0
-        greatest_increase = ["", 0]
-        greatest_decrease = ["", 99999999999]
+
 
 
 # tracking the totals
@@ -29,8 +32,9 @@ with open (file_path, 'r') as csvfile:
         total_net = total_net + int(row[1])
 
 # track net changes
-        previousnet = int(row[1])
+        
         Change = int(row[1]) - previousnet
+        previousnet = int(row[1])
         
         Net_Change = Net_Change + [Change]
     # Net_Change += [Change]
@@ -42,6 +46,23 @@ with open (file_path, 'r') as csvfile:
             greatest_increase[1] = Change
         
 
+        if Change < greatest_decrease[1]:
+            greatest_decrease[0] = row[0]
+            greatest_decrease[1] = Change
+
+
+   
+    
+    print("Financial Analysis")
+    print("-----------------------------")
+
+
+    print(f"Total Months: {str(total_months)}")
+    print(f"Total: {str(total_net)}")
+    print(f"Greatest Decrease in Profits: {str(greatest_decrease)}")
+    print(f"Greatest Increase in Profits: {str(greatest_increase)}")
+    
+    
 
 
 
