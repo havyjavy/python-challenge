@@ -9,13 +9,13 @@ with open (file_path, 'r') as csvfile:
 
 
     header = next(csvreader)
-    first_row = next(csvreader)
-
-
+   
+    candidates = []
     tvotes = 0
 
     for row in csvreader:
-
+        candidate = str(row[2])
+        candidates = candidate
         
     
 
@@ -24,4 +24,5 @@ with open (file_path, 'r') as csvfile:
 
     
     print(tvotes)
+    print(candidates)
 
